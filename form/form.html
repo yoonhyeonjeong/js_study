@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="join">
+        <h1>회원가입</h1>
+        <form action="#" id="form">
+            <ul>
+                <li>
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                </li>
+                <li>
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                </li>
+                <li>
+                    <label for="pw01">비밀번호</label>
+                    <input type="password" id="pw01" name="password" required aria-required="true">
+                </li>
+                <li>
+                    <label for="pw02">비밀번호 확인</label>
+                    <input type="password" id="pw02" name="passwordConfirm" required aria-required="true">
+                </li>
+                <li>
+                    <label>성별</label>
+                    <label for="male">
+                        <input type="radio" id="male" name="gender" value="male" required aria-required="true">
+                        남성
+                    </label>
+                    <label for="female">
+                        <input type="radio" id="female" name="gender" value="female" required aria-required="true">
+                        여성
+                    </label>
+                </li>
+                <li>
+                    <label for="birth">생년월일</label>
+                    <input type="date" id="birth" name="birth" required aria-required="true" min="1900-01-01" max="2024-01-01">
+                </li>
+                <li>
+                    <label>관심분야</label>
+                    <label>
+                    <input type="checkbox" name="interests" value="programming">
+                        프로그래밍
+                    </label>
+                    <label>
+                    <input type="checkbox" name="interests" value="design">
+                        디자인
+                    </label>
+                    <label>
+                    <input type="checkbox" name="interests" value="other">
+                        기타
+                    </label>
+                </li>
+            </ul>
+            <div>
+                <label for="agree">
+                    <input type="checkbox" required aria-required="true" id="agree">
+                    개인정보 동의
+                </label>
+            </div>
+            <button type="submit" aria-label="회원가입 제출">회원가입</button>
+        </form>
+    </div>
+    <script src="form.js"></script>
+</body>
+</html>
