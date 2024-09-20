@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체생성자</title>
+</head>
+<body>
+    <form id="form" action="#">
+        <input type="text" id="product_name" required placeholder="제품이름을 입력하세요">
+        <input type="number" id="product_price" required placeholder="제품가격을 입력하세요">
+        <input type="number" id="product_quantity" required placeholder="제품수량을 입력하세요">
+        <button type="submit">추가</button>
+    </form>
+    <ul class="product_list">
+    </ul>
+    <script>
+        // 제품 객체 생성자
+        function Product(name, price, quantity){
+            this.name = name;
+            this.price = price;
+            this.quantity = quantity;
+        }
+        
+        // const array = [];
+        const input = document.querySelectorAll('input');
+        const form = document.querySelector('#form');
+
+        let array = [];
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault();
+
+            let productName = document.getElementById('product_name').value
+            let productPrice = document.getElementById('product_price').value
+            let productQuantity = document.getElementById('product_quantity').value
+
+            if(!isNaN(productName)){
+                alert('제품명은 숫자로 할 수 없습니다')
+                return;
+            }
+            if(productQuantity > 10){
+                alert('제품 수량은 10개를 넘을수 없습니다')
+                return;
+            }
+
+            if(productPrice < 0 || productQuantity < 0){
+                alert('음수는 입력할 수 없습니다')
+                return;
+            }
+
+            addProduct(productName,productPrice,productQuantity)
+            input.forEach(input => input.value = '')
+        })
+
+        function addProduct(name, price, quantity){
+            const newProduct = new Product(name, price, quantity);
+            const productList = document.querySelector('ul')
+            const li = document.createElement('li');
+            li.textContent = `제품 이름: ${name}, 가격: ${price}원, 수량: ${quantity}개`
+            productList.append(li)
+            array.push(newProduct)
+
+            // 총 재고 가치 계산 (가격 * 수량)
+            const totalPrice = array.reduce((acc, currentItem)=>{
+                return acc + (Number(currentItem.price) * Number(currentItem.quantity));
+            },0)
+            console.log(totalPrice)
+        }
+
+
+
+    </script>
+</body>
+</html>

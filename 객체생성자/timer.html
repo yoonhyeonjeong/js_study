@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout, 객체생성자</title>
+</head>
+<body>
+    <p id="time"></p>
+    <script>
+    //  간단한 알람 시계 만들기
+    // 사용자가 특정 시간이 되면 알림을 받도록 설정하는 프로그램을 작성해 보세요.
+    // 사용자가 몇 초 후에 알람이 울리게 할지 시간을 입력하면, 그 시간 후에 콘솔에 "알람이 울립니다!"라는 메시지가 출력되도록 하세요.
+    // 단, setTimeout과 new Date()를 활용하여 현재 시간과 비교하는 방식으로 만들어 주세요.
+    
+    
+
+    function alarm(time){
+        let currentTime = new Date(); // 현재시간
+        let alarmTime = new Date(currentTime + time); // 현재시간 + time 밀리초세컨드 더함
+        const timeDiff = alarmTime - currentTime; // 시간차이
+        
+        setTimeout(()=>{
+            console.log('알람이 울립니다!!')
+        },timeDiff) // 시간차이만큼 대기 후 알람출력
+    }
+
+    alarm(5000)
+
+    // Event라는 객체 생성자를 만들어 주세요. 이 객체는 이벤트 이름, 이벤트 날짜(년, 월, 일), 이벤트 설명을 프로퍼티로 가져야 합니다.
+    // 이벤트를 생성한 후, 해당 이벤트가 얼마나 남았는지 콘솔에 출력하는 기능을 추가하세요. 예를 들어, "내 생일 이벤트까지 30일 남았습니다."와 같은 형식으로 출력되도록 하세요.
+    // new Date()를 사용하여 현재 날짜와 비교해 주세요
+
+    function Event(name, date){
+        this.name = name
+        // 이벤트 날짜를 new Date()로 변환
+        this.date = new Date(date) 
+        this.notice = function(){
+            const today = new Date();
+            const timeDiff = this.date - today; // 밀리초 단위 차이 계산
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
+            console.log(`공연 이벤트까지 ${daysLeft}일 남았습니다`)
+        }
+    }
+
+    const event = new Event('공연','2024-10-19')
+    console.log(event.notice())
+        
+    </script>
+</body>
+</html>
