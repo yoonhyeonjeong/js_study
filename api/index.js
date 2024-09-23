@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.dataset.id = item.id;
 
             const userIdSpan = document.createElement('span');
+            userIdSpan.className = 'userid';
             userIdSpan.textContent = `user id : ${item.userId}`;
             li.appendChild(userIdSpan);
 
@@ -46,6 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
             likeBtn.className = 'like-btn';
             likeBtn.textContent = `❤️ 0`;
             li.appendChild(likeBtn);
+            ul.appendChild(li);
+
+            const editBtn = document.createElement('button');
+            editBtn.className = 'edit-btn';
+            editBtn.textContent = `✏️`;
+            li.appendChild(editBtn);
             ul.appendChild(li);
         })
         const totalPost = document.querySelector('.total-post')
@@ -84,24 +91,68 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
     // 좋아요
     const likeCount = (e) => {
         if(e.target.classList.contains('like-btn')){
             const parentNode = e.target.closest('li')
             const likeBtn = parentNode.querySelector('.like-btn')
-            const likeText =likeBtn.textContent.split(' ')[1];
+            const likeText = likeBtn.textContent.split(' ')[1];
             let likeCount = parseInt(likeText, 10); 
             likeCount += 1;
             likeBtn.textContent = `❤️ ${likeCount}`
-
         }
     }
+    // 수정
+    const editPost = (e) => {
+        const modal = document.querySelector('.modal')
+        const idInput = document.querySelector('#user_id')
+        const titleInput = document.querySelector('#post_title')
+        const contentInput = document.querySelector('#post_content')
+        const parentNode = e.target.closest('li')
+        const content = parentNode.querySelector('.body')
 
+        if(e.target.classList.contains('edit-btn')){
+            modal.style.display = 'flex';
+            const userId = parentNode.querySelector('.userid')
+            const title = parentNode.querySelector('.title')
+            
+            idInput.value = userId.textContent
+            idInput.disabled = true;
+            titleInput.value = title.textContent
+            titleInput.disabled = true;
+            contentInput.value = content.textContent
+        }
+
+        const saveBtn = document.querySelector('.save-btn');
+        const itemId = Number(parentNode.dataset.id)
+        saveBtn.addEventListener('click', () => savePost(contentInput,content,modal,itemId))
+    }
+    
+    // 저장
+    const savePost = (contentInput, content ,modal, itemId) => {
+        if(contentInput.value === content.textContent){
+            alert('게시글 내용이 똑같습니다..다르게해주세용');
+            return
+        }
+
+        if(contentInput.value !== content.textContent){
+            const itemUpdate = allData.find(item => item.id === itemId)// 단일요소 찾을때
+            console.log(itemUpdate)
+            // 배열값 변경 
+            if(itemUpdate){
+                itemUpdate.body = contentInput.value
+            }
+            content.textContent = contentInput.value;
+            modal.style.display ='none'
+            renderItem(allData)
+        }
+    
+    }
     // 이벤트 위임 
     ul.addEventListener('click', (e) => {
         removeItem(e);
         likeCount(e);
+        editPost(e);
     });
     
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>객체생성자</title>
+    <title>post</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,6 +17,29 @@
     </div>
     <ul class="userlist">
     </ul>
+    <div class="modal">
+        <div id="modal-content">
+            <h2>edit post</h2>
+            <ul>
+                <li>
+                    <label for="user_id">user Id</label>
+                    <input type="text" value="" id="user_id">
+                </li>
+                <li>
+                    <label for="post_title">title</label>
+                    <input type="text" value="" id="post_title">
+                </li>
+                <li>
+                    <label for="post_content">content</label>
+                    <input type="text" value="" id="post_content">
+                </li>
+            </ul>
+            <div class="button-wrap">
+                <button class="save-btn">저장</button>
+                <button class="close-btn">닫기</button>
+            </div>
+        </div>
+      </div>
     <script src="./index.js"></script>
 </body>
 </html>
