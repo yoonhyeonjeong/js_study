@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+h1{
+    text-align: center;
+    padding: 20px;
+}
+.search{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.search input{
+    flex: 1;
+    outline: none;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.search button{
+    border: none;
+    font-weight: 700;
+    width: 100px;
+    background: #319fff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.total{
+    margin: 20px auto 0;
+    width: 800px;
+}
+.userlist{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 800px;
+    margin: 30px auto;
+    gap: 20px;
+    font-size: 18px;
+}
+.userlist li{
+    display: flex;
+    flex-direction: column;
+    width: calc(33.33% - 20px);
+    background: aliceblue;
+    padding: 15px;
+    position: relative;
+}
+.userlist li > span{
+    display: flex;
+}
+.userlist li > span + span{
+    margin-top: 10px;
+}
+.userlist .delete-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    background: #fff;
+    cursor: pointer;
+}
+.userlist .title{
+    font-weight: bold;
+}
+.userlist .body{
+    flex: 1;
+}
+.userlist .like-btn{
+    margin-top: 10px;
+    display: flex;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: center;
+}
