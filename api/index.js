@@ -43,17 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteBtn.textContent = 'X';
             li.appendChild(deleteBtn);
 
-            const likeBtn = document.createElement('button');
-            likeBtn.className = 'like-btn';
-            likeBtn.textContent = `❤️ 0`;
-            li.appendChild(likeBtn);
-            ul.appendChild(li);
+            const buttonWrap = document.createElement('div');
+            buttonWrap.className = 'button-wrap'
+            li.appendChild(buttonWrap)
 
             const editBtn = document.createElement('button');
             editBtn.className = 'edit-btn';
             editBtn.textContent = `✏️`;
-            li.appendChild(editBtn);
-            ul.appendChild(li);
+            buttonWrap.appendChild(editBtn);
+
+            const likeBtn = document.createElement('button');
+            likeBtn.className = 'like-btn';
+            likeBtn.textContent = `❤️ 0`;
+            buttonWrap.appendChild(likeBtn);
+
+            ul.appendChild(li)
         })
         const totalPost = document.querySelector('.total-post')
         totalPost.textContent = `총 게시글 ${data.length}개`
@@ -102,9 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
             likeBtn.textContent = `❤️ ${likeCount}`
         }
     }
+
     // 수정
+    const modal = document.querySelector('.modal')
     const editPost = (e) => {
-        const modal = document.querySelector('.modal')
         const idInput = document.querySelector('#user_id')
         const titleInput = document.querySelector('#post_title')
         const contentInput = document.querySelector('#post_content')
@@ -112,32 +117,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = parentNode.querySelector('.body')
 
         if(e.target.classList.contains('edit-btn')){
-            modal.style.display = 'flex';
             const userId = parentNode.querySelector('.userid')
             const title = parentNode.querySelector('.title')
+
+            modal.style.display = 'flex';
+            contentInput.focus();
+            titleInput.focus();
             
             idInput.value = userId.textContent
             idInput.disabled = true;
             titleInput.value = title.textContent
-            titleInput.disabled = true;
             contentInput.value = content.textContent
         }
 
         const saveBtn = document.querySelector('.save-btn');
         const itemId = Number(parentNode.dataset.id)
-        saveBtn.addEventListener('click', () => savePost(contentInput,content,modal,itemId))
+        saveBtn.addEventListener('click', () => savePost(contentInput, content, itemId))
     }
     
     // 저장
-    const savePost = (contentInput, content ,modal, itemId) => {
+    const savePost = (contentInput, content, itemId) => {
+        const isSaveConfirmed = confirm('저장하시겠습니까?')
         if(contentInput.value === content.textContent){
-            alert('게시글 내용이 똑같습니다..다르게해주세용');
-            return
+            alert('게시글 내용이 동일합니다.!');
+            return;
         }
 
-        if(contentInput.value !== content.textContent){
+        if(isSaveConfirmed && contentInput.value !== content.textContent){
             const itemUpdate = allData.find(item => item.id === itemId)// 단일요소 찾을때
-            console.log(itemUpdate)
             // 배열값 변경 
             if(itemUpdate){
                 itemUpdate.body = contentInput.value
@@ -146,8 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display ='none'
             renderItem(allData)
         }
-    
     }
+
+    // 모달 닫기
+    const closeBtn = document.querySelector('.close-btn')
+    const modalClose = () => {
+        const isCloseConfirmed = confirm('닫으시겠습니까?')
+        if(isCloseConfirmed){
+            modal.style.display ='none'
+        }
+    }
+    closeBtn.addEventListener('click', modalClose)
+    
     // 이벤트 위임 
     ul.addEventListener('click', (e) => {
         removeItem(e);
