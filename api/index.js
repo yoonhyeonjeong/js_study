@@ -1,19 +1,40 @@
 // HTML 문서가 완전히 로드되고 파싱된 후에 발생
 document.addEventListener('DOMContentLoaded', () => {
     let allData = []; // 전역변수로 데이터 정의 
-
+    // postData
     async function fetchData() {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts');
             allData = await response.json();
-            console.log(allData)
-            renderItem(allData)
         } catch (error) {
             console.log('error')
         }
     }
 
     fetchData()
+
+     // comments 데이터 가져오기
+     async function fetchComments() {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/comments');
+            allComments = await response.json(); // 댓글 데이터
+            console.log('Comments:', allComments);
+            mergePostsAndComments(); // 게시물과 댓글 데이터를 병합
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    }
+    fetchComments()
+
+    // post data + comments data
+     function mergePostsAndComments() {
+        // 각 post에 해당하는 comments를 추가
+        allData.forEach(post => {
+            // 해당 post에 달린 댓글들을 필터링하여 배열로 저장
+            post.comment = allComments.filter(comment => comment.postId === post.id);
+        });
+        renderItem(allData); // 병합된 데이터를 화면에 렌더링
+    }
 
     // 렌더링
     const ul = document.querySelector('.userlist')
@@ -61,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         const totalPost = document.querySelector('.total-post')
         totalPost.textContent = `총 게시글 ${data.length}개`
+        console.log(data)
+
+        // 댓글 데이터 합치기 
+        const commentDiv = document.createElement('div')
+        commentDiv.className = 'comment-wrap'
+        
     }
 
     // 검색
@@ -127,29 +154,34 @@ document.addEventListener('DOMContentLoaded', () => {
             idInput.value = userId.textContent
             idInput.disabled = true;
             titleInput.value = title.textContent
+            titleInput.disabled = true;
             contentInput.value = content.textContent
         }
 
         const saveBtn = document.querySelector('.save-btn');
         const itemId = Number(parentNode.dataset.id)
+        
+        // 이벤트 중복실행 방지, 기존에 등록된 이벤트 리스너를 제거
+        saveBtn.removeEventListener('click', savePost);
+        // 새로운 리스너 등록
         saveBtn.addEventListener('click', () => savePost(contentInput, content, itemId))
     }
     
     // 저장
-    const savePost = (contentInput, content, itemId) => {
-        const isSaveConfirmed = confirm('저장하시겠습니까?')
+    const savePost = (contentInput, content, itemId) => {   
         if(contentInput.value === content.textContent){
-            alert('게시글 내용이 동일합니다.!');
+            alert('게시글 내용이 동일합니다.!')
             return;
         }
 
+        const isSaveConfirmed = confirm('저장하시겠습니까?')
         if(isSaveConfirmed && contentInput.value !== content.textContent){
             const itemUpdate = allData.find(item => item.id === itemId)// 단일요소 찾을때
             // 배열값 변경 
             if(itemUpdate){
                 itemUpdate.body = contentInput.value
             }
-            content.textContent = contentInput.value;
+            content.textContent = contentInput.value
             modal.style.display ='none'
             renderItem(allData)
         }
