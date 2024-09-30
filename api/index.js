@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/comments');
             allComments = await response.json(); // 댓글 데이터
-            console.log('Comments:', allComments);
             mergePostsAndComments(); // 게시물과 댓글 데이터를 병합
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -77,17 +76,29 @@ document.addEventListener('DOMContentLoaded', () => {
             likeBtn.className = 'like-btn';
             likeBtn.textContent = `❤️ 0`;
             buttonWrap.appendChild(likeBtn);
+            // 댓글 추가
+            item.comment.forEach((comment,index) => {
+                console.log(index)
+                const commentDiv = document.createElement('div')
+                commentDiv.className = 'comment-wrap'
+                commentDiv.innerHTML = `<p class="post-id">${index}Post Id : ${comment.postId}</p>
+                <p class="post-id">email : ${comment.email}</p>
+                <p class="post-id">content : ${comment.body}</p>
+                `
+                li.appendChild(commentDiv)
+                ul.appendChild(li)
+            })
 
-            ul.appendChild(li)
+        })
+
+
+        forEach(()=>{
+
         })
         const totalPost = document.querySelector('.total-post')
         totalPost.textContent = `총 게시글 ${data.length}개`
-        console.log(data)
 
-        // 댓글 데이터 합치기 
-        const commentDiv = document.createElement('div')
-        commentDiv.className = 'comment-wrap'
-        
+
     }
 
     // 검색

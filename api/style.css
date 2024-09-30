@@ -48,7 +48,6 @@ h1{
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     width: 800px;
     margin: 30px auto;
     gap: 20px;
