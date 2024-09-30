@@ -20,6 +20,8 @@ button {
     width: 400px;
     border: solid 1px;
     padding: 15px;
+    background-color: #2a2a2a;
+    border-radius: 15px
 } 
 .caculator-header-btns{
     display: flex;
@@ -40,11 +42,11 @@ button {
     background-color: #2ca72c;
 }
 .calculator-display{
-    border: solid 1px;
-    padding:15px 20px 15px 0;
+    padding-right: 20px;
 }
 .calculator-display .calculator-result{
-    font-size: 35px;
+    color: #5e3ede;
+    font-size: 50px;
     text-align: right;
 }
 .caculator-header-btns button + button{
@@ -53,25 +55,25 @@ button {
 .calculator-body-btns{
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     margin-top: 15px;
-    border-top: 1px solid;
-    border-left: 1px solid;
     height: 300px;
 }
 .calculator-body-btns .button{
-    width: 25%;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-    background: #eee;
+    width: calc(25% - 10px);
     transition: all 0.3s;
+    font-size: 25px;
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3);
 }
 .calculator-body-btns .button:hover{
-    background: #e1e0e0;
+    filter: invert(50%);
 }
 .calculator-body-btns .button:active{
-    background: #aaa;
+    filter: invert(70%);
 }
 .calculator-body-btns .zero{
-    width: 50%;
+    width: calc(50% - 10px);
 }
 
