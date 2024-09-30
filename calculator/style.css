@@ -55,6 +55,7 @@ button {
 .calculator-body-btns{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 10px;
     margin-top: 15px;
     height: 300px;
@@ -62,7 +63,7 @@ button {
 .calculator-body-btns .button{
     width: calc(25% - 10px);
     transition: all 0.3s;
-    font-size: 25px;
+    font-size: 22px;
     color: #fff;
     border-radius: 15px;
     box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3);
