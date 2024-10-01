@@ -43,11 +43,14 @@ button {
 }
 .calculator-display{
     padding-right: 20px;
+    text-align: right;
+    color: #5e3ede;
+}
+.calculator-display .calculator-caculation{
+    font-size: 24px;
 }
 .calculator-display .calculator-result{
-    color: #5e3ede;
     font-size: 50px;
-    text-align: right;
 }
 .caculator-header-btns button + button{
     margin-left: 8px;

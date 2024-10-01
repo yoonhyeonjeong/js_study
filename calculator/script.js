@@ -1,12 +1,12 @@
 const button = document.querySelectorAll('.button');
 const display = document.querySelector('.calculator-result');
-const buttonResult = document.querySelector('.button.equal')
+const caculation = document.querySelector('.calculator-caculation');
 let firstOperand = null;
 let operator = null;
 let secondOperand = null; 
 
 button.forEach((button)=>{
-    button.addEventListener('click',function(){        
+    button.addEventListener('click',function(){   
         let displayNumber = display.textContent
         // 숫자버튼 눌렀을때
         if(this.classList.contains('number')){
@@ -19,19 +19,19 @@ button.forEach((button)=>{
             // 연산자 있을때
             if (operator !== null) {
                 secondOperand = display.textContent; // 현재디스플레이값->두번째값
-                console.log(secondOperand)
             } else {
                 firstOperand = display.textContent; // 처음눌렀을때=> 첫번쨰입력값
             }
+            caculation.textContent = `${firstOperand} ${operator} ${secondOperand}`
         // 소수점 눌렀을때
         }else if(this.classList.contains('dot')){ 
-            // 소수점 없으면추가
             if(!displayNumber.includes('.')){
                 display.textContent += this.textContent
             }
         // C 눌렀을때 초기화
         }else if(this.textContent === 'C'){ 
-            display.textContent = 0
+            display.textContent = 0;
+            caculation.textContent = '';
             firstOperand = null;
             secondOperand = null;
             operator = null;
@@ -47,14 +47,13 @@ button.forEach((button)=>{
                 }
             }
             operator = this.textContent; // 연산자를 저장
-            console.log(firstOperand, operator)
+            caculation.textContent = `${firstOperand} ${operator} ${secondOperand}`
         // 결과값
         }else if(this.classList.contains('equal')){
-            console.log(firstOperand, secondOperand)
             if(firstOperand !== null & operator !== null){
                 calculate(firstOperand, operator, secondOperand)
             }
-            firstOperand = null 
+            firstOperand = display.textContent; 
             secondOperand = null;
             operator = null;
         }
@@ -63,18 +62,24 @@ button.forEach((button)=>{
 
 // 계산
 function calculate(firstOperand, operator, secondOperand){
+    let result;
     switch (operator) {
         case '+':
-            display.textContent = parseFloat(firstOperand) + parseFloat(secondOperand);
+            result = parseFloat(firstOperand) + parseFloat(secondOperand);
             break;
         case '-':
-            display.textContent = parseFloat(firstOperand) - parseFloat(secondOperand);
+            result = parseFloat(firstOperand) - parseFloat(secondOperand);
             break;
         case '*':
-            display.textContent = parseFloat(firstOperand) * parseFloat(secondOperand);
+            result = parseFloat(firstOperand) * parseFloat(secondOperand);
             break;
         case '/':
-            display.textContent = parseFloat(firstOperand) / parseFloat(secondOperand);
+            result = parseFloat(firstOperand) / parseFloat(secondOperand);
             break;
+    }
+    if (result % 1 !== 0) {
+        display.textContent = result.toFixed(2);
+    } else {
+        display.textContent = result;
     }
 }
