@@ -1,61 +1,62 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-html, body {
+html,
+body {
     height: 100%;
 }
-body{
+body {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 button {
-    background: none; 
+    background: none;
     border: none;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.calculator-container{
+.calculator-container {
     width: 400px;
     border: solid 1px;
     padding: 15px;
     background-color: #2a2a2a;
-    border-radius: 15px
-} 
-.caculator-header-btns{
+    border-radius: 15px;
+}
+.caculator-header-btns {
     display: flex;
     padding-bottom: 10px;
 }
-.caculator-header-btns button{
+.caculator-header-btns button {
     width: 12px;
     height: 12px;
-    border-radius:50%;
+    border-radius: 50%;
 }
-.caculator-header-btns .btn-close{
+.caculator-header-btns .btn-close {
     background-color: #f94545;
 }
-.caculator-header-btns .btn-minimize{
+.caculator-header-btns .btn-minimize {
     background-color: #ffc400;
 }
-.caculator-header-btns .btn-fullscreen{
+.caculator-header-btns .btn-fullscreen {
     background-color: #2ca72c;
 }
-.calculator-display{
+.calculator-display {
     padding-right: 20px;
     text-align: right;
     color: #5e3ede;
 }
-.calculator-display .calculator-caculation{
+.calculator-display .calculator-calculation {
     font-size: 24px;
 }
-.calculator-display .calculator-result{
+.calculator-display .calculator-result {
     font-size: 50px;
 }
-.caculator-header-btns button + button{
+.caculator-header-btns button + button {
     margin-left: 8px;
 }
-.calculator-body-btns{
+.calculator-body-btns {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -63,7 +64,7 @@ button {
     margin-top: 15px;
     height: 300px;
 }
-.calculator-body-btns .button{
+.calculator-body-btns .button {
     width: calc(25% - 10px);
     transition: all 0.3s;
     font-size: 22px;
@@ -71,13 +72,12 @@ button {
     border-radius: 15px;
     box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.3);
 }
-.calculator-body-btns .button:hover{
+.calculator-body-btns .button:hover {
     filter: invert(50%);
 }
-.calculator-body-btns .button:active{
+.calculator-body-btns .button:active {
     filter: invert(70%);
 }
-.calculator-body-btns .zero{
+.calculator-body-btns .zero {
     width: calc(50% - 10px);
 }
-
